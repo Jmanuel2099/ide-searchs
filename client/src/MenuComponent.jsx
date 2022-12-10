@@ -9,7 +9,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 
-export const Menu = () => {
+export const MenuComponent = () => {
   const [canibales, setCanibales] = useState(1);
   const [misioneros, setMisioneros] = useState(1);
   const [espacio, setEspacio] = useState("left");
