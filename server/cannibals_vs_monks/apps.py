@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SearchsConfig(AppConfig):
+class CannibalsVsMonksConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'searchs'
+    name = 'cannibals_vs_monks'

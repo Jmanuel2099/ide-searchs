@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'searchs', #This is the application to make searches
+    'cannibals_vs_monks', #This is the application to make searches
 ]
 
 MIDDLEWARE = [
