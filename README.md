@@ -10,13 +10,13 @@ This application integrates the algorithms of breadth-first, depth-first, A*, un
 
 - Backend project
 
-Creates a virtual environment 
+Creates and activte a virtual environment 
 ```bash
     py -m venv venv
-    pip Install -r requirements.txt
+    .\venv\Scripts\activate
 ```
 
-installs the dependencies 
+Installs the dependencies 
 ```bash
-    pip Install -r requirements.txt
+    pip install -r requirements.txt
 ```

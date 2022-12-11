@@ -18,7 +18,7 @@ class GameSearchsView:
         bfs_search.bfs(initial_state)
         path = bfs_search.get_visited_states()
         return JsonResponse({
-            'path': path,
+            'path': self._map_states(path ),
             'path_len': len(path),
             'generated_nodes': bfs_search.get_node_generated()
         })
@@ -36,10 +36,20 @@ class GameSearchsView:
         path = dfs_search.get_visited_states()
         return JsonResponse({
             'initial_state': initial_state,
-            'path': path,
+            'path': self._map_states(path),
             'path_len': len(path),
             'generated_nodes': dfs_search.get_node_generated()
         })
+
+    def _map_states(self, states):
+        mapped_states = []
+        for state in states:
+            mapped_states.append({
+                'cannibals' : state[0],
+                'monks': state[1],
+                'side': state[2]
+            })
+        return mapped_states
 
     def _examinate_input_data(self, data):
         if (data['cannibals'] > 3 or data['cannibals'] < 0 
