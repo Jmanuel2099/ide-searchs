@@ -1,7 +1,7 @@
 from cannibals_vs_monks.searchs.game_metrics import GameMetrics
 from treelib import Tree
 
-
+#Busqueda por prfundidad 
 class DepthFirstSearch:
     def __init__(self) -> None:
         self.game_metrics = GameMetrics()

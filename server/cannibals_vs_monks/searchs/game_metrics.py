@@ -18,7 +18,10 @@ class GameMetrics:
             for cannibal in range(game_state[1] + 1):
                 if missionary + cannibal < 1 or missionary + cannibal > 2:
                     continue
-                new_state = (game_state[0] - missionary, game_state[1] - cannibal, 'left')
+                new_missionary = game_state[0] - missionary
+                new_cannibal = game_state[1] - cannibal
+                new_state = (new_missionary, new_cannibal, 'left', new_missionary + new_cannibal)
+                #new_state = (game_state[0] - missionary, game_state[1] - cannibal , 'left')
                 if 0 < new_state[0] < new_state[1]:
                     continue
                 if 0 < 3 - new_state[0] < 3 - new_state[1]:
@@ -32,7 +35,10 @@ class GameMetrics:
             for cannibal in range(3 - game_state[1] + 1):
                 if missionary + cannibal < 1 or missionary + cannibal > 2:
                     continue
-                new_state = (game_state[0] + missionary, game_state[1] + cannibal, 'right')
+                new_missionary = game_state[0] + missionary 
+                new_cannibal =  game_state[1] + cannibal
+                new_state = (new_missionary, new_cannibal, 'right', new_missionary + new_cannibal)
+                # new_state = (game_state[0] + missionary, game_state[1] + cannibal, 'right')
                 if 0 < new_state[0] < new_state[1]:
                     continue
                 if 0 < 3 - new_state[0] < 3 - new_state[1]:
@@ -40,14 +46,25 @@ class GameMetrics:
                 new_states.append(new_state)
         return new_states
 
-    def find_best_frontier(self, frontier_states, side, compute_fn):
+    def find_best_frontier(self, frontier_states, side):
+        # print(frontier_states, side)
         min_value = 100000
-        min_state = -1
-        for state in frontier_states:
-            if state[2] != side:
+        best_frontier = set()
+        for frontier in frontier_states:
+            if frontier[2] != side:
                 continue
-            fn = compute_fn(state)
-            if fn < min_value:
-                min_value = fn
-                min_state = state
-        return min_state, min_value
+            if frontier[3] < min_value:
+                min_value = frontier[3]
+                best_frontier = frontier
+        return best_frontier
+
+        # min_value = 100000
+        # min_state = -1
+        # for state in frontier_states:
+        #     if state[2] != side:
+        #         continue
+        #     fn = compute_fn(state)
+        #     if fn < min_value:
+        #         min_value = fn
+        #         min_state = state
+        # return min_state, min_value
