@@ -57,14 +57,3 @@ class GameMetrics:
                 min_value = frontier[3]
                 best_frontier = frontier
         return best_frontier
-
-        # min_value = 100000
-        # min_state = -1
-        # for state in frontier_states:
-        #     if state[2] != side:
-        #         continue
-        #     fn = compute_fn(state)
-        #     if fn < min_value:
-        #         min_value = fn
-        #         min_state = state
-        # return min_state, min_value

@@ -1,5 +1,5 @@
 from cannibals_vs_monks.searchs.game_metrics import GameMetrics
-from treelib import Tree
+import time
 
 #Busqueda por prfundidad 
 class DepthFirstSearch:
@@ -17,11 +17,15 @@ class DepthFirstSearch:
 
     def get_node_generated(self):
         return len(self.state_stack) + len(self.visited_states)
+    
+    def get_win(self):
+        return self.win
 
-    def dfs(self, initial_state):
+    def dfs(self, initial_state, expected_time):
+        start = time.time()
         self.state_stack.append(initial_state)
 
-        while not self.win and self.state_stack:
+        while not self.win and self.state_stack and (time.time() - start) <= expected_time:
             current_state = self.state_stack.pop()
             
             if current_state not in self.visited_states:

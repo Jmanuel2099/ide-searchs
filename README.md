@@ -20,3 +20,8 @@ Installs the dependencies
 ```bash
     pip install -r requirements.txt
 ```
+
+Run backend project
+```bash
+    python manage.py runserver
+```
