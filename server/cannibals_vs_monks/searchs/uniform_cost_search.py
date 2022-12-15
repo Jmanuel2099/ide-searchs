@@ -31,7 +31,7 @@ class UniformCostSearch:
         the uniform cost search algorithm in a time interval.
 
         The solution state of the game is that all missionaries and
-        cannibals pass sideways and will be represented (0, 0, left, 0).
+        cannibals pass sideways and will be represented (0, 0, left or right, 0).
         """
         start = time.time()
         self.frontier_states.append(initial_state)

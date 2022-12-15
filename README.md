@@ -1,5 +1,5 @@
 # ide-searchs
-This application integrates the algorithms of breadth-first, depth-first, A*, uniform cost or first-best search algorithm to define the best path from point A to point B.
+This application integrates breadth-first, depth-first, A*, uniform cost and first-best search algorithms to find a solution to the game of cannibals and missionaries.
 
 ## Tech Stack
 - Backend: [Python](https://www.python.org/)
@@ -25,3 +25,7 @@ Run backend project
 ```bash
     python manage.py runserver
 ```
+
+|                                      Depth First Search                                              |
+| :-----------------------------------------------------: | :-----------------------------------------------------------: |
+| ![DFS_request](./images/DFS_request.png?raw=true) | ![DFS_response](./images/DFS_response.png?raw=true) |
