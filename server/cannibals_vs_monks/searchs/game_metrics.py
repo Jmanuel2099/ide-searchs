@@ -13,6 +13,10 @@ class GameMetrics:
         return game_state[2] == 'left'
 
     def get_boat_at_right_new_states(self, game_state):
+        """
+        From a current state that has the boat on the right, 
+        obtains the possible states that can be generated from the current state.
+        """
         new_states = []
         for missionary in range(game_state[0] + 1):
             for cannibal in range(game_state[1] + 1):
@@ -21,7 +25,6 @@ class GameMetrics:
                 new_missionary = game_state[0] - missionary
                 new_cannibal = game_state[1] - cannibal
                 new_state = (new_missionary, new_cannibal, 'left', new_missionary + new_cannibal)
-                #new_state = (game_state[0] - missionary, game_state[1] - cannibal , 'left')
                 if 0 < new_state[0] < new_state[1]:
                     continue
                 if 0 < 3 - new_state[0] < 3 - new_state[1]:
@@ -30,6 +33,10 @@ class GameMetrics:
         return new_states
 
     def get_boat_at_left_new_states(self, game_state):
+        """
+        From a current state that has the boat on the left, 
+        obtains the possible states that can be generated from the current state.
+        """
         new_states = []
         for missionary in range(3 - game_state[0] + 1):
             for cannibal in range(3 - game_state[1] + 1):
@@ -38,7 +45,6 @@ class GameMetrics:
                 new_missionary = game_state[0] + missionary 
                 new_cannibal =  game_state[1] + cannibal
                 new_state = (new_missionary, new_cannibal, 'right', new_missionary + new_cannibal)
-                # new_state = (game_state[0] + missionary, game_state[1] + cannibal, 'right')
                 if 0 < new_state[0] < new_state[1]:
                     continue
                 if 0 < 3 - new_state[0] < 3 - new_state[1]:
@@ -47,7 +53,10 @@ class GameMetrics:
         return new_states
 
     def find_best_frontier(self, frontier_states, side):
-        # print(frontier_states, side)
+        """
+        Obtains the best state from its weight to be used in the best-first
+        and uniform-cost search algorithms. 
+        """
         min_value = 100000
         best_frontier = set()
         for frontier in frontier_states:

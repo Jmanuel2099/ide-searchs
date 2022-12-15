@@ -22,6 +22,16 @@ class DepthFirstSearch:
         return self.win
 
     def dfs(self, initial_state, expected_time):
+        """
+        Initial_state: set() -> (missionaries, cannibals, ship side, cost having state)
+        expected_time: int -> Is the time limit you have to search for the solution. 
+
+        Try to find a solution to the game of cannibals and missionaries by means of
+        the algorithm of deep search in a time interval
+
+        The solution state of the game is that all missionaries and
+        cannibals pass sideways and will be represented (0, 0, left, 0).
+        """
         start = time.time()
         self.state_stack.append(initial_state)
 
@@ -42,6 +52,10 @@ class DepthFirstSearch:
                 break
     
     def get_future_states(self, game_state):
+        """
+        Calculate the possible states that can be generated from
+        a state, to continue the search for the solution. 
+        """
         if self.game_metrics.boat_is_at_right(game_state):
             return self.game_metrics.get_boat_at_right_new_states(game_state)
         else:

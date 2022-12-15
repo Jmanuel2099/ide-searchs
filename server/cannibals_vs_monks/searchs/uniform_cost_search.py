@@ -23,6 +23,16 @@ class UniformCostSearch:
         return len(self.path) + len(self.frontier_states)
 
     def uniform_cost(self, initial_state, expected_time):
+        """
+        Initial_state: set() -> (missionaries, cannibals, ship side, cost having state)
+        expected_time: int -> Is the time limit you have to search for the solution.
+
+        Try to find a solution to the game of cannibals and missionaries by means of
+        the uniform cost search algorithm in a time interval.
+
+        The solution state of the game is that all missionaries and
+        cannibals pass sideways and will be represented (0, 0, left, 0).
+        """
         start = time.time()
         self.frontier_states.append(initial_state)
         self.side = initial_state[2]

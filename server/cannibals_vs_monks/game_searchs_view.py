@@ -92,6 +92,16 @@ class GameSearchsView:
 
 
     def _map_states(self, states):
+        """
+        Maps the elements of the list states to be able to return it
+        as a response to a request.
+
+        states: list() -> [(0, 1, right, 1), (0, 0, letf, 0)]
+        return [
+            {'missionary': 0, 'cannibals':1, 'side': right}, 
+            {'missionary': 0, 'cannibals':0, 'side': left}
+            ]
+        """
         mapped_states = []
         for state in states:
             mapped_states.append({
@@ -102,6 +112,10 @@ class GameSearchsView:
         return mapped_states
 
     def _examinate_input_data(self, data):
+        """
+        Validates the data coming in at the end point to be able to work
+        with correct data. 
+        """
         if (data['cannibals'] > 3 or data['cannibals'] < 0 
             or data['missionary'] > 3 or data['missionary'] < 0):
             return'Missionary and cannibals must be between 0 and 3'
