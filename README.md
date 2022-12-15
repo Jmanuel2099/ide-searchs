@@ -26,7 +26,6 @@ Run backend project
     python manage.py runserver
 ```
 
-|                                      Depth First Search                                              |
+|                       Request                       |                        Response version                         |
 | :-----------------------------------------------------: | :-----------------------------------------------------------: |
-|           Request                                      |               Response                       |
 | ![DFS_request](./images_documentation/DFS_request.png?raw=true) | ![DFS_response](./images_documentation/DFS_response.png?raw=true) |
