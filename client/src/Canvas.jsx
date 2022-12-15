@@ -1,52 +1,67 @@
 import React, { useRef, useEffect } from "react";
-import canibal from "./assets/canibal.jpg";
+import canibal from "./assets/canibal.png";
 import misionero from "./assets/misionero.png";
 
 const Canvas = (props) => {
+  const { data, form, setDesactivar, desactivar } = props;
   const canvasRef = useRef(null);
 
-  const misionero1 = (ctx, frameCount) => {
-    var imageObj1 = new Image();
-    imageObj1.src = misionero;
-    imageObj1.onload = function () {
-      ctx.drawImage(imageObj1, 30, 30, 30, 30);
-    };
-  };
-  const misionero2 = (ctx, frameCount) => {
-    var imageObj1 = new Image();
-    imageObj1.src = misionero;
-    imageObj1.onload = function () {
-      ctx.drawImage(imageObj1, 30, 60, 30, 30);
-    };
-  };
-  const misionero3 = (ctx, frameCount) => {
-    var imageObj1 = new Image();
-    imageObj1.src = misionero;
-    imageObj1.onload = function () {
-      ctx.drawImage(imageObj1, 30, 90, 30, 30);
-    };
-  };
-  const canibal1 = (ctx, frameCount) => {
+  const canibals = (ctx, position) => {
     var imageObj1 = new Image();
     imageObj1.src = canibal;
     imageObj1.onload = function () {
-      ctx.drawImage(imageObj1, 0, 30, 30, 30);
+      ctx.drawImage(imageObj1, 100, 30, 30, 30);
     };
-  };
-  const canibal2 = (ctx, frameCount) => {
-    var imageObj1 = new Image();
-    imageObj1.src = canibal;
-    imageObj1.onload = function () {
+    var imageObj2 = new Image();
+    imageObj2.src = canibal;
+    imageObj2.onload = function () {
       ctx.drawImage(imageObj1, 0, 60, 30, 30);
     };
-  };
-  const canibal3 = (ctx, frameCount) => {
-    var imageObj1 = new Image();
-    imageObj1.src = canibal;
-    imageObj1.onload = function () {
+    var imageObj3 = new Image();
+    imageObj3.src = canibal;
+    imageObj3.onload = function () {
       ctx.drawImage(imageObj1, 0, 90, 30, 30);
     };
   };
+
+  const misioners = (ctx, position) => {
+    var imageObj1 = new Image();
+    imageObj1.src = misionero;
+    imageObj1.onload = function () {
+      ctx.drawImage(imageObj1, 250, 30, 30, 30);
+    };
+    var imageObj2 = new Image();
+    imageObj2.src = misionero;
+    imageObj2.onload = function () {
+      ctx.drawImage(imageObj1, 155, 60, 30, 30);
+    };
+    var imageObj3 = new Image();
+    imageObj3.src = misionero;
+    imageObj3.onload = function () {
+      ctx.drawImage(imageObj1, 35, 90, 30, 30);
+    };
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    //Our first draw
+    context.fillStyle = "#008f39";
+    context.fillRect(0, 0, context.canvas.width / 3, context.canvas.height);
+    context.fillRect(
+      (context.canvas.width / 3) * 2,
+      0,
+      context.canvas.width / 3,
+      context.canvas.height
+    );
+    context.fillStyle = "#0096d2";
+    context.fillRect(
+      context.canvas.width / 3,
+      0,
+      context.canvas.width / 3,
+      context.canvas.height
+    );
+  }, []);
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -54,19 +69,15 @@ const Canvas = (props) => {
     context.mozImageSmoothingEnabled = false;
     context.webkitImageSmoothingEnabled = false;
     context.imageSmoothingEnabled = false;
-    let frameCount = 1;
-    let animationFrameId;
+    // canvas.style.background = "#ff8";
 
+    //context.fillRect(0,50,0,0);
+
+    let animationFrameId;
     //Our draw came here
     const render = () => {
-      frameCount++;
+      canibals(context);
 
-      canibal1(context, frameCount);
-      canibal2(context, frameCount);
-      canibal3(context, frameCount);
-      misionero1(context, frameCount);
-      misionero2(context, frameCount);
-      misionero3(context, frameCount);
       animationFrameId = window.requestAnimationFrame(render);
     };
     render();
@@ -74,7 +85,31 @@ const Canvas = (props) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [canibal1, canibal2, canibal3, misionero1, misionero2, misionero3]);
+  }, [canibals]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.msImageSmoothingEnabled = false;
+    context.mozImageSmoothingEnabled = false;
+    context.webkitImageSmoothingEnabled = false;
+    context.imageSmoothingEnabled = false;
+    // canvas.style.background = "#ff8";
+
+    //context.fillRect(0,50,0,0);
+
+    let animationFrameId;
+    //Our draw came here
+    const render = () => {
+      misioners(context);
+      animationFrameId = window.requestAnimationFrame(render);
+    };
+    render();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  }, [misioners]);
 
   return <canvas ref={canvasRef} {...props} className="canvas" />;
 };
