@@ -28,4 +28,5 @@ Run backend project
 
 |                                      Depth First Search                                              |
 | :-----------------------------------------------------: | :-----------------------------------------------------------: |
-| ![DFS_request](./images/DFS_request.png?raw=true) | ![DFS_response](./images/DFS_response.png?raw=true) |
+|           Request                                      |               Response                       |
+| ![DFS_request](./images_documentation/DFS_request.png?raw=true) | ![DFS_response](./images_documentation/DFS_response.png?raw=true) |
