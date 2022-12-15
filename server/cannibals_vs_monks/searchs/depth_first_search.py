@@ -39,7 +39,6 @@ class DepthFirstSearch:
             current_state = self.state_stack.pop()
             
             if current_state not in self.visited_states:
-                print(current_state)
                 self.visited_states.append(current_state)
 
             future_states = self.get_future_states(current_state)
