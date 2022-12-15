@@ -4,12 +4,23 @@ class GameMetrics:
         pass
 
     def is_win(self, game_state):
+        """
+        If the current game state is (0, 0, right or left) returns true.
+        """
         return game_state[0] == game_state[1] == 0
     
     def boat_is_at_right(self, game_state):
+        """
+        Returns true if the boat is on the right side so that we can find
+        out the possible states if the boot is on the rigtht side.
+        """
         return game_state[2] == 'right'
 
     def boat_is_at_left(self, game_state):
+        """
+        Returns true if the boat is on the left side so that we can find
+        out the possible states if the boot is on the left side.
+        """
         return game_state[2] == 'left'
 
     def get_boat_at_right_new_states(self, game_state):

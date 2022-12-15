@@ -38,11 +38,11 @@ class BestFirstSearch:
             best_frontier_state = self.game_metrics.find_best_frontier(self.frontier_states, self.side)
             self.toggle_side()
 
-            self.frontier_states.remove(best_frontier_state)
-            self.path.append(best_frontier_state)
-
             if self.game_metrics.is_win(best_frontier_state):
                 self.win = True
+
+            self.path.append(best_frontier_state)
+            self.frontier_states.remove(best_frontier_state)
 
             if self.game_metrics.boat_is_at_left(best_frontier_state):
                 self.frontier_states += self.game_metrics.get_boat_at_left_new_states(best_frontier_state)
