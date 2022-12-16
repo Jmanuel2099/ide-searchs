@@ -16,6 +16,7 @@ import {
   getProfundidad,
   getUniform_cost,
 } from "./service";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Menu = ({
   setData,
@@ -26,14 +27,41 @@ export const Menu = ({
   missionary,
   side,
   time,
-  desactivar,
-  setDesactivar,
+
+  cani1,
+  cani2,
+  cani3,
+  setCani1,
+  setCani2,
+  setCani3,
+
+  min1,
+  min2,
+  min3,
+  setMin1,
+  setMin2,
+  setMin3,
+  validarm,
+  validarc,
 }) => {
   const [anchura, setAnchura] = useState(false);
   const [profundidad, setProfundidad] = useState(false);
   const [uniform_cost, setUniform_cost] = useState(false);
   const [best_first, setBest_first] = useState(false);
-  const { readOnly } = desactivar;
+
+  const validarSide = ({ target }) => {
+    validarc(cannibals, target.value);
+    validarm(missionary, target.value);
+    onInputChange({ target });
+  };
+  const validarMisionero = ({ target }) => {
+    validarm(target.value, side);
+    onInputChange({ target });
+  };
+  const validarCanibal = ({ target }) => {
+    validarc(target.value, side);
+    onInputChange({ target });
+  };
 
   useEffect(() => {
     if (anchura) {
@@ -58,7 +86,8 @@ export const Menu = ({
 
   const resquestAnchura = async () => {
     const recorrido = await getAnchura(formState);
-    setData(recorrido);
+
+    setData(recorrido.data);
   };
 
   const resquestProfundidad = async () => {
@@ -77,34 +106,30 @@ export const Menu = ({
   };
 
   const obtenerAnchura = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setAnchura(true);
       formState.method = "Breadth Search";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
   const obtnerProfundidad = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setProfundidad(true);
       formState.method = " Deep Search";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
   const obtnerBest_first = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setUniform_cost(true);
       formState.method = "First the best";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
   const obtnerUniform_cos = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setBest_first(true);
       formState.method = "Uniform Cost";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
@@ -148,7 +173,7 @@ export const Menu = ({
             label="Missionary"
             name="missionary"
             value={missionary}
-            onChange={onInputChange}
+            onChange={validarMisionero}
           >
             <MenuItem value={0}>0 missionary</MenuItem>
             <MenuItem value={1}>a missionary</MenuItem>
@@ -164,7 +189,7 @@ export const Menu = ({
             label="Cannibals"
             name="cannibals"
             value={cannibals}
-            onChange={onInputChange}
+            onChange={validarCanibal}
           >
             <MenuItem value={0}>0 cannibal</MenuItem>
             <MenuItem value={1}>a cannibal</MenuItem>
@@ -181,7 +206,7 @@ export const Menu = ({
             name="side"
             value={side}
             required
-            onChange={onInputChange}
+            onChange={validarSide}
           >
             <MenuItem value="right">Right</MenuItem>
             <MenuItem value="left">Left</MenuItem>
