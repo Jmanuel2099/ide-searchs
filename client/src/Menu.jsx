@@ -325,7 +325,7 @@ export const Menu = ({
             min2.lado == "izq" &&
             min3.lado == "izq"
           ) {
-            setMin1({ x: 220, y: 15, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
             break;
           }
           if (
@@ -365,7 +365,7 @@ export const Menu = ({
             min2.lado == "der" &&
             min3.lado == "der"
           ) {
-            setMin1({ x: 220, y: 55, lado: "der" });
+            setMin1({ x: 220, y: 15, lado: "der" });
             break;
           }
           if (
@@ -776,7 +776,7 @@ export const Menu = ({
 
   const validarSide = ({ target }) => {
     validarc(cannibals, target.value);
-    validarm(target.value, side);
+    validarm(missionary, target.value);
     onInputChange({ target });
   };
   const validarMisionero = ({ target }) => {
