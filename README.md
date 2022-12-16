@@ -26,21 +26,24 @@ Run backend project
 
 ## Instructions to consume the backend. 
 
-Endpoints: 
-    Best first search: http://127.0.0.1:8000/cannibals_monks/best_first
-    Uniform cost search: http://127.0.0.1:8000/cannibals_monks/uniform_cost
-    Depth first search: http://127.0.0.1:8000/cannibals_monks/dfs
-    Breadth first search: http://127.0.0.1:8000/cannibals_monks/bfs
+- Endpoints: 
+    - Best first search: http://127.0.0.1:8000/cannibals_monks/best_first
+    - Uniform cost search: http://127.0.0.1:8000/cannibals_monks/uniform_cost
+    - Depth first search: http://127.0.0.1:8000/cannibals_monks/dfs
+    - Breadth first search: http://127.0.0.1:8000/cannibals_monks/bfs
 
-Request body:
-{
-    "cannibals": 2,
-    "missionary": 3,
-    "side": "left",
-    "time": 1000
-}
+- Request body:
+```json
+    {
+        "cannibals": 2,
+        "missionary": 3,
+        "side": "left",
+        "time": 1000
+    }
+```
 
-Response: 
+- Response: 
+```json
 {
 	"path": [
 		{
@@ -113,8 +116,10 @@ Response:
 	"generated_nodes": 18,
 	"win": true
 }
+```
 
-Error message: 
+- Error message: 
+```json
 {
     "path": [],
     "path_len": 0,
@@ -122,6 +127,7 @@ Error message:
     "win": false,
     "error": "You lost, there are more cannibals than missionaries."
 }
+```
 
 <!-- |                       Request                       |                       Response                        |
 | :-----------------------------------------------------: | :-----------------------------------------------------------: |
