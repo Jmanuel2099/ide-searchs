@@ -51,8 +51,8 @@ const App = () => {
     setMax(!!data ? (!!data.path ? data.path.length : 0) : 0);
   }, [data]);
 
-
   const nextState = () => {
+   
     if (indice >= 0 && indice < max) {
       const state = data.path[indice];
       validarm(state.missionary, state.side);
@@ -62,6 +62,7 @@ const App = () => {
   };
 
   const validarm = (value, s) => {
+    debugger;
     if (s == "left") {
       switch (value) {
         case 0:
@@ -352,6 +353,7 @@ const App = () => {
     }
   };
   const validarc = (value, s) => {
+    debugger;
     if (s == "left") {
       switch (value) {
         case 0:
@@ -399,7 +401,7 @@ const App = () => {
             cani2.lado == "der" &&
             cani3.lado == "izq"
           ) {
-            setCani1({ x: 270, y: 55, lado: "der" });
+            setCani1({ x: 270, y: 15, lado: "der" });
             break;
           }
           if (
@@ -763,7 +765,6 @@ const App = () => {
             min2={min2}
             min3={min3}
             indice={indice}
-           
             nextState={nextState}
           />
         </Grid>

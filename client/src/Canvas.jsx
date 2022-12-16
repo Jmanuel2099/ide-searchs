@@ -64,16 +64,8 @@ const Canvas = (props) => {
       context.canvas.width / 3,
       context.canvas.height
     );
-    const render = () => {
-      canibals(context);
-      animationFrameId = window.requestAnimationFrame(render);
-    };
-    render();
-
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  }, [cani1, cani2, cani3, min1, min2, min3]);
+    canibals(context);
+  });
 
   return <canvas ref={canvasRef} {...props} className="canvas" />;
 };
