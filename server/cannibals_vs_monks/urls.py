@@ -7,5 +7,6 @@ urlpatterns = [
     path('bfs', game_searchs.bfs_search),
     path('dfs', game_searchs.dfs_search),
     path('best_first', game_searchs.best_first_search),
-    path('uniform_cost', game_searchs.uniform_cost_search)
+    path('uniform_cost', game_searchs.uniform_cost_search),
+    path('statistics', game_searchs.get_statistics),
 ]
