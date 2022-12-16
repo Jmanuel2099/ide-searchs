@@ -26,12 +26,12 @@ class GameSearchsView:
             bfs_search = BreadthFirstSearch()
             bfs_search.bfs(initial_state, request_body['time'])
             path = bfs_search.get_visited_states()
-            data = json.dumps({
+            data = {
                 'path': self.__map_states(path),
                 'path_len': len(path),
                 'generated_nodes': bfs_search.get_node_generated(),
                 'win' : bfs_search.get_win()
-            })
+            }
             return JsonResponse(data)
 
         except Exception:
@@ -55,12 +55,12 @@ class GameSearchsView:
             dfs_search = DepthFirstSearch()
             dfs_search.dfs(initial_state, request_body['time'])
             path = dfs_search.get_visited_states()
-            data = json.dumps({
+            data = {
                 'path': self.__map_states(path),
                 'path_len': len(path),
                 'generated_nodes': dfs_search.get_node_generated(),
                 'win' : dfs_search.get_win()
-            })
+            }
             return JsonResponse(data)
 
         except Exception:
@@ -84,12 +84,12 @@ class GameSearchsView:
             best_first = BestFirstSearch()
             best_first.best_first(initial_state, request_body['time'])
             path = best_first.get_path()
-            data = json.dumps({
+            data = {
                 'path': self.__map_states(path),
                 'path_len': len(path),
                 'generated_nodes': best_first.get_node_generated(),
                 'win' : best_first.get_win()
-            })
+            }
             return JsonResponse(data)
 
         except Exception: 
@@ -113,12 +113,12 @@ class GameSearchsView:
             uniform_cost = UniformCostSearch()
             uniform_cost.uniform_cost(initial_state, request_body['time'])
             path = uniform_cost.get_path()
-            data = json.dumps({
+            data = {
                 'path': self.__map_states(path),
                 'path_len': len(path),
                 'generated_nodes': uniform_cost.get_nodes_generated(),
                 'win' : uniform_cost.get_win()
-            })
+            }
             return JsonResponse(data)
 
         except Exception:
