@@ -1,6 +1,7 @@
 import json
 import sys
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from cannibals_vs_monks.searchs.breadth_first_search import BreadthFirstSearch
 from cannibals_vs_monks.searchs.depth_first_search import DepthFirstSearch
@@ -16,7 +17,7 @@ class GameSearchsView:
             request_body = json.loads(request.body)
             is_correct = self.__examinate_input_data(request_body)
             if len(is_correct) != 0:
-                return HttpResponse({'error': is_correct}, content_type="application/json", status=400)
+                return JsonResponse(self.__message_error(is_correct))
 
             cannibals = request_body['cannibals']
             missionary = request_body['missionary']
@@ -31,12 +32,13 @@ class GameSearchsView:
                 'generated_nodes': bfs_search.get_node_generated(),
                 'win' : bfs_search.get_win()
             })
-            return HttpResponse(data, content_type="application/json", status=200)
+            return JsonResponse(data)
+
         except Exception:
             e = sys.exc_info()[1]
             print(e.args[0])
             error_message = 'No solution can be found from state (%s, %s, %s)' %(missionary, cannibals, side)
-            return HttpResponse({'error': error_message}, content_type="application/json", status=404)
+            return JsonResponse(self.__message_error(error_message))
 
     @csrf_exempt
     def dfs_search(self, request):
@@ -44,8 +46,8 @@ class GameSearchsView:
             request_body = json.loads(request.body)
             is_correct = self.__examinate_input_data(request_body)
             if len(is_correct) != 0:
-                return HttpResponse({'error': is_correct}, content_type="application/json", status=400)
-            
+                return JsonResponse(self.__message_error(is_correct))
+                
             cannibals = request_body['cannibals']
             missionary = request_body['missionary']
             side = request_body['side']
@@ -59,12 +61,13 @@ class GameSearchsView:
                 'generated_nodes': dfs_search.get_node_generated(),
                 'win' : dfs_search.get_win()
             })
-            return HttpResponse(data, content_type="application/json", status=200)
+            return JsonResponse(data)
+
         except Exception:
             e = sys.exc_info()[1]
             print(e.args[0])
             error_message = 'No solution can be found from state (%s, %s, %s)' %(missionary, cannibals, side)
-            return HttpResponse({'error': error_message}, content_type="application/json", status=404)
+            return JsonResponse(self.__message_error(error_message))
     
     @csrf_exempt
     def best_first_search(self, request):
@@ -72,7 +75,7 @@ class GameSearchsView:
             request_body = json.loads(request.body)
             is_correct = self.__examinate_input_data(request_body)
             if len(is_correct) != 0:
-                return HttpResponse({'error': is_correct}, content_type="application/json", status=400)
+                return JsonResponse(self.__message_error(is_correct))
             
             cannibals = request_body['cannibals']
             missionary = request_body['missionary']
@@ -87,12 +90,13 @@ class GameSearchsView:
                 'generated_nodes': best_first.get_node_generated(),
                 'win' : best_first.get_win()
             })
-            return HttpResponse(data, content_type="application/json", status=200)
+            return JsonResponse(data)
+
         except Exception: 
             e = sys.exc_info()[1]
             print(e.args[0])
             error_message = 'No solution can be found from state (%s, %s, %s)' %(missionary, cannibals, side)
-            return HttpResponse({'error': error_message}, content_type="application/json", status=404)
+            return JsonResponse(self.__message_error(error_message))
 
     @csrf_exempt
     def uniform_cost_search(self, request):
@@ -100,7 +104,7 @@ class GameSearchsView:
             request_body = json.loads(request.body)
             is_correct = self.__examinate_input_data(request_body)
             if len(is_correct) != 0:
-                return HttpResponse({'error': is_correct}, content_type="application/json", status=400)
+                return JsonResponse(self.__message_error(is_correct))
             
             cannibals = request_body['cannibals']
             missionary = request_body['missionary']
@@ -115,12 +119,13 @@ class GameSearchsView:
                 'generated_nodes': uniform_cost.get_nodes_generated(),
                 'win' : uniform_cost.get_win()
             })
-            return HttpResponse(data, content_type="application/json", status=200)
+            return JsonResponse(data)
+
         except Exception:
             e = sys.exc_info()[1]
             print(e.args[0])
             error_message = 'No solution can be found from state (%s, %s, %s)' %(missionary, cannibals, side)
-            return HttpResponse({'error': error_message}, content_type="application/json", status=404)
+            return JsonResponse(self.__message_error(error_message))
 
     @csrf_exempt
     def get_statistics(self, request):
@@ -128,7 +133,7 @@ class GameSearchsView:
             request_body = json.loads(request.body)
             is_correct = self.__examinate_input_data(request_body)
             if len(is_correct) != 0:
-                return HttpResponse({'error': is_correct}, content_type="application/json", status=400)
+                return JsonResponse(self.__message_error(is_correct))
             
             cannibals = request_body['cannibals']
             missionary = request_body['missionary']
@@ -137,12 +142,14 @@ class GameSearchsView:
             statistics = Statistics()
             unified_statistics = statistics.get_statistics(initial_state, request_body['time'])
             data = json.dumps(unified_statistics)
-            return HttpResponse(data, content_type="application/json", status=200)
+            return JsonResponse(data)
+
         except:
             e = sys.exc_info()[1]
             print(e.args[0])
             error_message = 'No solution can be found from state (%s, %s, %s)' %(missionary, cannibals, side)
-            return HttpResponse({'error': error_message}, content_type="application/json", status=404)
+            return JsonResponse(self.__message_error(error_message))
+
 
     def __map_states(self, states):
         """
@@ -182,3 +189,16 @@ class GameSearchsView:
         if data['time'] < 0:
             return 'Invalid time'
         return ''
+    
+    def __message_error(self, error_message):
+        """
+        Receive an error message to form a dictionary and return it when
+        something anomalous happens. 
+        """
+        return {
+            'path': [],
+            'path_len': 0,
+            'generated_nodes': 0,
+            'win' : False,
+            'error': error_message
+        }

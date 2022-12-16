@@ -56,10 +56,3 @@ class Statistics:
         path_size = len(uniform_cost.get_path())
         node_generated = uniform_cost.get_nodes_generated()
         return {'path_size': path_size, 'node_generated':node_generated}
-
-    def __get_best_algorithm(self, path_sizes):
-        min_path_size = min(path_sizes.values())
-        print(min_path_size)
-        # algorithms = path_sizes.keys()
-
-        return []
