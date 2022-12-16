@@ -16,6 +16,7 @@ import {
   getProfundidad,
   getUniform_cost,
 } from "./service";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Menu = ({
   setData,
@@ -47,7 +48,6 @@ export const Menu = ({
   const [profundidad, setProfundidad] = useState(false);
   const [uniform_cost, setUniform_cost] = useState(false);
   const [best_first, setBest_first] = useState(false);
-  
 
   const validarSide = ({ target }) => {
     validarc(cannibals, target.value);
@@ -85,8 +85,32 @@ export const Menu = ({
   }, [best_first]);
 
   const resquestAnchura = async () => {
-    const recorrido = await getAnchura(formState);
-    setData(recorrido);
+    const recorrido = getAnchura(formState);
+    const res = await toast.promise(recorrido, {
+      pending: {
+        render() {
+          return "Getting result";
+        },
+        icon: "🟡",
+      },
+      success: {
+        render() {
+          return `Obtained result`;
+        },
+        // other options
+        icon: "✅",
+      },
+      error: {
+        render({ data }) {
+          // When the promise reject, data will contains the error
+          return `Error ${data.response.data.message}`;
+        },
+
+        icon: "❌",
+      },
+    });
+
+    setData(res.data);
   };
 
   const resquestProfundidad = async () => {
@@ -135,6 +159,16 @@ export const Menu = ({
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+      />
       <Typography
         variant="h1"
         fontWeight="bold"

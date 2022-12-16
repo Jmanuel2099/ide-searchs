@@ -18,8 +18,8 @@ export const getAnchura = async (data) => {
   const resp = await inteligentes
     .post("bfs", inf)
     .then(function (response) {
-      console.log(response)
-      return response.data;
+  
+      return response;
     })
     .catch(function (error) {
       console.log(error.message + " error");
