@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Canvas from "./Canvas";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -10,7 +11,16 @@ const Item = styled(Paper)(({ theme }) => ({
   fontSize: "20px",
   color: theme.palette.text.secondary,
 }));
-export const Panel = ({ data, formState, desactivar, setDesactivar }) => {
+export const Panel = ({
+  data,
+  formState,
+  cani1,
+  cani2,
+  cani3,
+  min1,
+  min2,
+  min3,
+}) => {
   return (
     <>
       <Grid container spacing={2}>
@@ -32,10 +42,26 @@ export const Panel = ({ data, formState, desactivar, setDesactivar }) => {
       <hr />
       <Canvas
         data={!!data ? data.path : []}
+        cani1={cani1}
+        cani2={cani2}
+        cani3={cani3}
+        min1={min1}
+        min2={min2}
+        min3={min3}
         ubicacion={formState}
-        desactivar={desactivar}
-        setDesactivar={setDesactivar}
+       
       />
+      <hr />
+      <Grid container spacing={2}>
+        <Grid item xs={8} md={8}></Grid>
+        <Grid item xs={4} md={4}>
+          <Item>
+            <Button variant="outlined" fullWidth>
+              Next move
+            </Button>
+          </Item>
+        </Grid>
+      </Grid>
     </>
   );
 };

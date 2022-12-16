@@ -26,14 +26,767 @@ export const Menu = ({
   missionary,
   side,
   time,
-  desactivar,
-  setDesactivar,
+
+  cani1,
+  cani2,
+  cani3,
+  setCani1,
+  setCani2,
+  setCani3,
+
+  min1,
+  min2,
+  min3,
+  setMin1,
+  setMin2,
+  setMin3,
 }) => {
   const [anchura, setAnchura] = useState(false);
   const [profundidad, setProfundidad] = useState(false);
   const [uniform_cost, setUniform_cost] = useState(false);
   const [best_first, setBest_first] = useState(false);
-  const { readOnly } = desactivar;
+  const validarm = (value, s) => {
+    debugger;
+    if (s == "left") {
+      switch (value) {
+        case 0:
+          setMin1({ x: 220, y: 15, lado: "der" });
+          setMin2({ x: 220, y: 55, lado: "der" });
+          setMin3({ x: 220, y: 95, lado: "der" });
+
+          break;
+        case 1:
+          if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
+            break;
+          } else if (
+            (min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "der") ||
+            (min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "izq") ||
+            (min1.lado == "der" && min2.lado == "izq" && min3.lado == "der")
+          ) {
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 55, lado: "der" });
+            break;
+          }
+          break;
+        case 2:
+          if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            break;
+          } else if (
+            (min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "der") ||
+            (min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq") ||
+            (min1.lado == "izq" && min2.lado == "der" && min3.lado == "izq")
+          ) {
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            break;
+          }
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin2({ x:40, y: 55, lado: "izq" });
+            break;
+          }
+          break;
+        case 3:
+          if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            setMin3({ x: 40, y: 95, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin3({ x: 40, y: 95, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            break;
+          }
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            setMin3({ x: 40, y: 95, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            break;
+          }
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setMin2({ x: 40, y: 15, lado: "izq" });
+            setMin3({ x: 40, y: 95, lado: "izq" });
+            break;
+          }
+          // expected output: "Mangoes and papayas are $2.79 a pound."
+          break;
+        default:
+          console.log("Mangoes and papayas are $2.79 a pound.");
+          break;
+      }
+    } else {
+      switch (value) {
+        case 0:
+          setMin1({ x: 40, y: 15, lado: "izq" });
+          setMin2({ x: 40, y: 55, lado: "izq" });
+          setMin3({ x: 40, y: 95, lado: "izq" });
+
+          break;
+        case 1:
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            break;
+          } else if (
+            (min1.lado == "izq" &&
+            min2.lado == "izq" &&
+              min3.lado == "der") ||
+            (min1.lado == "der" &&
+            min2.lado == "izq" &&
+              min3.lado == "izq") ||
+            (min1.lado == "izq" && min2.lado == "der" && min3.lado == "izq")
+          ) {
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            break;
+          }
+          if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin2({ x: 40, y: 55, lado: "izq" });
+            break;
+          }
+          break;
+        case 2:
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
+
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 40, y: 15, lado: "izq" });
+            break;
+          } else if (
+            (min1.lado == "izq" &&
+            min2.lado == "der" &&
+              min3.lado == "der") ||
+            (min1.lado == "der" &&
+            min2.lado == "der" &&
+              min3.lado == "izq") ||
+            (min1.lado == "der" && min2.lado == "izq" && min3.lado == "der")
+          ) {
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            break;
+          }
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            break;
+          }
+          break;
+        case 3:
+          if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
+            setMin3({ x: 220, y: 95, lado: "der" });
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            break;
+          } else if (
+            min1.lado == "der" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin3({ x: 220, y: 95, lado: "der" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 220, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin2({ x: 220, y: 55, lado: "der" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "der" &&
+            min3.lado == "izq"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
+            break;
+          } else if (
+            min1.lado == "izq" &&
+            min2.lado == "izq" &&
+            min3.lado == "der"
+          ) {
+            setMin1({ x: 220, y: 15, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            min1.lado == "der" &&
+            min2.lado == "izq" &&
+            min3.lado == "izq"
+          ) {
+            setMin2({ x: 220, y: 15, lado: "der" });
+            setMin3({ x: 220, y: 95, lado: "der" });
+            break;
+          }
+          // expected output: "Mangoes and papayas are $2.79 a pound."
+          break;
+        default:
+          console.log("Mangoes and papayas are $2.79 a pound.");
+          break;
+      }
+    }
+  };
+  const validarc = (value, s) => {
+  
+    if (s == "left") {
+      switch (value) {
+        case 0:
+          setCani1({ x: 270, y: 15, lado: "der" });
+          setCani2({ x: 270, y: 55, lado: "der" });
+          setCani3({ x: 270, y: 95, lado: "der" });
+
+          break;
+        case 1:
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            setCani2({ x: 270, y: 55, lado: "der" });
+            break;
+          } else if (
+            (cani1.lado == "izq" &&
+              cani2.lado == "der" &&
+              cani3.lado == "der") ||
+            (cani1.lado == "der" &&
+              cani2.lado == "der" &&
+              cani3.lado == "izq") ||
+            (cani1.lado == "der" && cani2.lado == "izq" && cani3.lado == "der")
+          ) {
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani2({ x: 270, y: 55, lado: "der" });
+            break;
+          }
+          break;
+        case 2:
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            break;
+          } else if (
+            (cani1.lado == "izq" &&
+              cani2.lado == "izq" &&
+              cani3.lado == "der") ||
+            (cani1.lado == "der" &&
+              cani2.lado == "izq" &&
+              cani3.lado == "izq") ||
+            (cani1.lado == "izq" && cani2.lado == "der" && cani3.lado == "izq")
+          ) {
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            break;
+          }
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          }
+          break;
+        case 3:
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            setCani3({ x: 0, y: 95, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            console.log("aquii");
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani3({ x: 0, y: 95, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            break;
+          }
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            setCani3({ x: 0, y: 95, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          }
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani2({ x: 0, y: 15, lado: "izq" });
+            setCani3({ x: 0, y: 95, lado: "izq" });
+            break;
+          }
+          // expected output: "Mangoes and papayas are $2.79 a pound."
+          break;
+        default:
+          console.log("Mangoes and papayas are $2.79 a pound.");
+          break;
+      }
+    } else {
+      switch (value) {
+        case 0:
+          setCani1({ x: 0, y: 15, lado: "izq" });
+          setCani2({ x: 0, y: 55, lado: "izq" });
+          setCani3({ x: 0, y: 95, lado: "izq" });
+
+          break;
+        case 1:
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          } else if (
+            (cani1.lado == "izq" &&
+              cani2.lado == "izq" &&
+              cani3.lado == "der") ||
+            (cani1.lado == "der" &&
+              cani2.lado == "izq" &&
+              cani3.lado == "izq") ||
+            (cani1.lado == "izq" && cani2.lado == "der" && cani3.lado == "izq")
+          ) {
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          }
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani2({ x: 0, y: 55, lado: "izq" });
+            break;
+          }
+          break;
+        case 2:
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            setCani2({ x: 270, y: 55, lado: "der" });
+
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 0, y: 15, lado: "izq" });
+            break;
+          } else if (
+            (cani1.lado == "izq" &&
+              cani2.lado == "der" &&
+              cani3.lado == "der") ||
+            (cani1.lado == "der" &&
+              cani2.lado == "der" &&
+              cani3.lado == "izq") ||
+            (cani1.lado == "der" && cani2.lado == "izq" && cani3.lado == "der")
+          ) {
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani2({ x: 270, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani2({ x: 270, y: 55, lado: "der" });
+            break;
+          }
+          break;
+        case 3:
+          if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            setCani2({ x: 270, y: 55, lado: "der" });
+            setCani3({ x: 270, y: 95, lado: "der" });
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            break;
+          } else if (
+            cani1.lado == "der" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani3({ x: 270, y: 95, lado: "der" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 270, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani2({ x: 270, y: 55, lado: "der" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "der" &&
+            cani3.lado == "izq"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            setCani3({ x: 270, y: 55, lado: "der" });
+            break;
+          } else if (
+            cani1.lado == "izq" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "der"
+          ) {
+            setCani1({ x: 270, y: 15, lado: "der" });
+            setCani2({ x: 270, y: 55, lado: "der" });
+            break;
+          }
+          if (
+            cani1.lado == "der" &&
+            cani2.lado == "izq" &&
+            cani3.lado == "izq"
+          ) {
+            setCani2({ x: 270, y: 15, lado: "der" });
+            setCani3({ x: 270, y: 95, lado: "der" });
+            break;
+          }
+          // expected output: "Mangoes and papayas are $2.79 a pound."
+          break;
+        default:
+          console.log("Mangoes and papayas are $2.79 a pound.");
+          break;
+      }
+    }
+  };
+
+  const validarSide = ({ target }) => {
+    validarc(cannibals, target.value);
+    validarm(target.value, side);
+    onInputChange({ target });
+  };
+  const validarMisionero = ({ target }) => {
+    validarm(target.value, side);
+    onInputChange({ target });
+  };
+  const validarCanibal = ({ target }) => {
+    validarc(target.value, side);
+    onInputChange({ target });
+  };
 
   useEffect(() => {
     if (anchura) {
@@ -77,34 +830,30 @@ export const Menu = ({
   };
 
   const obtenerAnchura = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setAnchura(true);
       formState.method = "Breadth Search";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
   const obtnerProfundidad = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setProfundidad(true);
       formState.method = " Deep Search";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
   const obtnerBest_first = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setUniform_cost(true);
       formState.method = "First the best";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
   const obtnerUniform_cos = () => {
-    if (isFormValid && !readOnly) {
+    if (isFormValid) {
       setBest_first(true);
       formState.method = "Uniform Cost";
-      setDesactivar({ readOnly: !readOnly });
     }
     return;
   };
@@ -148,7 +897,7 @@ export const Menu = ({
             label="Missionary"
             name="missionary"
             value={missionary}
-            onChange={onInputChange}
+            onChange={validarMisionero}
           >
             <MenuItem value={0}>0 missionary</MenuItem>
             <MenuItem value={1}>a missionary</MenuItem>
@@ -164,7 +913,7 @@ export const Menu = ({
             label="Cannibals"
             name="cannibals"
             value={cannibals}
-            onChange={onInputChange}
+            onChange={validarCanibal}
           >
             <MenuItem value={0}>0 cannibal</MenuItem>
             <MenuItem value={1}>a cannibal</MenuItem>
@@ -181,7 +930,7 @@ export const Menu = ({
             name="side"
             value={side}
             required
-            onChange={onInputChange}
+            onChange={validarSide}
           >
             <MenuItem value="right">Right</MenuItem>
             <MenuItem value="left">Left</MenuItem>
