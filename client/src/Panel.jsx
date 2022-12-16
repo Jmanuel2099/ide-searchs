@@ -20,6 +20,9 @@ export const Panel = ({
   min1,
   min2,
   min3,
+  nextState,
+
+  indice,
 }) => {
   return (
     <>
@@ -49,15 +52,21 @@ export const Panel = ({
         min2={min2}
         min3={min3}
         ubicacion={formState}
-       
       />
       <hr />
       <Grid container spacing={2}>
-        <Grid item xs={8} md={8}></Grid>
+        <Grid item xs={8} md={8}>
+          <Item>{`State: ${indice}`}</Item>
+        </Grid>
         <Grid item xs={4} md={4}>
           <Item>
-            <Button variant="outlined" fullWidth>
-              Next move
+            <Button
+              variant="contained"
+              fullWidth
+              color="success"
+              onClick={nextState}
+            >
+              Next state
             </Button>
           </Item>
         </Grid>

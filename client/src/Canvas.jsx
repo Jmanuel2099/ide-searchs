@@ -47,6 +47,8 @@ const Canvas = (props) => {
 
     const context = canvas.getContext("2d");
     //Our first draw
+
+    let animationFrameId;
     context.fillStyle = "#008f39";
     context.fillRect(0, 0, context.canvas.width / 3, context.canvas.height);
     context.fillRect(
@@ -62,8 +64,6 @@ const Canvas = (props) => {
       context.canvas.width / 3,
       context.canvas.height
     );
-
-    let animationFrameId;
     const render = () => {
       canibals(context);
       animationFrameId = window.requestAnimationFrame(render);
@@ -73,7 +73,7 @@ const Canvas = (props) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [canibals]);
+  }, [cani1, cani2, cani3, min1, min2, min3]);
 
   return <canvas ref={canvasRef} {...props} className="canvas" />;
 };
