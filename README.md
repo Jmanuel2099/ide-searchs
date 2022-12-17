@@ -11,7 +11,7 @@ This application integrates breadth-first, depth-first, A*, uniform cost and fir
 
 Creates and activte a virtual environment 
 ```bash
-	cd server
+    cd server
     py -m venv venv
     .\venv\Scripts\activate
 ```
