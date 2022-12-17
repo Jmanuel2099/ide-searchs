@@ -4,12 +4,14 @@ This application integrates breadth-first, depth-first, A*, uniform cost and fir
 ## Tech Stack
 - Backend: [Python](https://www.python.org/)
 - Backend-Framework: [Django](https://docs.djangoproject.com/en/4.1/)
+- Frontend: [React](https://es.reactjs.org/)
 
 
 ### Running the backend project
 
 Creates and activte a virtual environment 
 ```bash
+	cd server
     py -m venv venv
     .\venv\Scripts\activate
 ```
