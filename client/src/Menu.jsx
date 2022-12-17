@@ -13,10 +13,12 @@ import {
 import {
   getAnchura,
   getBest_first,
+  getEstadisticas,
   getProfundidad,
   getUniform_cost,
 } from "./service";
 import { ToastContainer, toast } from "react-toastify";
+import { Modal } from "./Modal";
 
 export const Menu = ({
   setData,
@@ -43,11 +45,16 @@ export const Menu = ({
   setMin3,
   validarm,
   validarc,
+  indice,
+  max,
 }) => {
   const [anchura, setAnchura] = useState(false);
   const [profundidad, setProfundidad] = useState(false);
   const [uniform_cost, setUniform_cost] = useState(false);
   const [best_first, setBest_first] = useState(false);
+  const [statistics, setStatistics] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [esta, setEsta] = useState(null);
 
   const validarSide = ({ target }) => {
     validarc(cannibals, target.value);
@@ -62,37 +69,59 @@ export const Menu = ({
     validarc(target.value, side);
     onInputChange({ target });
   };
+  useEffect(() => {
+    if (anchura == max) {
+      setAnchura(false);
+      setProfundidad(false);
+      setUniform_cost(false);
+      setBest_first(false);
+      setStatistics(false);
+    }
+  }, [indice, max]);
 
   useEffect(() => {
     if (anchura) {
       resquestAnchura();
+      setAnchura(false)
     }
   }, [anchura]);
   useEffect(() => {
     if (profundidad) {
       resquestProfundidad();
+      setProfundidad(false)
     }
   }, [profundidad]);
   useEffect(() => {
     if (uniform_cost) {
       resquestUniform_cost();
+      setUniform_cost(false)
     }
   }, [uniform_cost]);
   useEffect(() => {
     if (best_first) {
       resquestBest_first();
+      setBest_first(false)
     }
   }, [best_first]);
 
+  useEffect(() => {
+    if (open) {
+      resquestStatic();
+    }
+  }, [open]);
   const resquestAnchura = async () => {
     const recorrido = await getAnchura(formState);
 
-    setData(recorrido.data);
+    setData(recorrido);
   };
 
   const resquestProfundidad = async () => {
     const recorrido = await getProfundidad(formState);
     setData(recorrido);
+  };
+  const resquestStatic = async () => {
+    const recorrido = await getEstadisticas(formState);
+    setEsta(recorrido);
   };
 
   const resquestUniform_cost = async () => {
@@ -106,36 +135,39 @@ export const Menu = ({
   };
 
   const obtenerAnchura = () => {
-    if (isFormValid) {
-      setAnchura(true);
-      formState.method = "Breadth Search";
-    }
+    setAnchura(true);
+    formState.method = "Breadth Search";
+
     return;
   };
   const obtnerProfundidad = () => {
-    if (isFormValid) {
-      setProfundidad(true);
-      formState.method = " Deep Search";
-    }
+    setProfundidad(true);
+    formState.method = " Deep Search";
+
     return;
   };
   const obtnerBest_first = () => {
-    if (isFormValid) {
-      setUniform_cost(true);
-      formState.method = "First the best";
-    }
+    setUniform_cost(true);
+    formState.method = "First the best";
+
     return;
   };
   const obtnerUniform_cos = () => {
-    if (isFormValid) {
-      setBest_first(true);
-      formState.method = "Uniform Cost";
+    setBest_first(true);
+    formState.method = "Uniform Cost";
+
+    return;
+  };
+  const obtnerStatic = () => {
+    if (!open) {
+      setOpen(true);
     }
     return;
   };
 
   return (
     <>
+      <Modal open={open} setOpen={setOpen} esta={esta} />
       <Typography
         variant="h1"
         fontWeight="bold"
@@ -254,6 +286,14 @@ export const Menu = ({
           sx={{ gridColumn: "span 8" }}
         >
           Uniform Cost
+        </Button>
+        <hr />
+        <Button
+          variant="outlined"
+          onClick={obtnerStatic}
+          sx={{ gridColumn: "span 8" }}
+        >
+          Get Statistics
         </Button>
       </Box>
     </>

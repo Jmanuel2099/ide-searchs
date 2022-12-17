@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const inteligentes = axios.create({
   baseURL: "http://127.0.0.1:8000/cannibals_monks/",
 });
@@ -18,8 +17,7 @@ export const getAnchura = async (data) => {
   const resp = await inteligentes
     .post("bfs", inf)
     .then(function (response) {
-  
-      return response;
+      return response.data;
     })
     .catch(function (error) {
       console.log(error.message + " error");
@@ -67,6 +65,22 @@ export const getProfundidad = async (data) => {
     .then(function (response) {
       const { data } = response;
 
+      return data;
+    })
+    .catch(function (error) {
+      return error;
+    });
+
+  return resp;
+};
+
+export const getEstadisticas = async (data) => {
+  const inf = convertData(data);
+  const resp = await inteligentes
+    .post("statistics", inf)
+    .then(function (response) {
+      const { data } = response;
+      console.log(data);
       return data;
     })
     .catch(function (error) {

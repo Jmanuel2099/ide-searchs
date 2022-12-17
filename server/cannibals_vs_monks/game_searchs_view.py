@@ -141,8 +141,8 @@ class GameSearchsView:
             initial_state = (missionary, cannibals, side, missionary + cannibals )
             statistics = Statistics()
             unified_statistics = statistics.get_statistics(initial_state, request_body['time'])
-            data = json.dumps(unified_statistics)
-            return JsonResponse(data)
+            #data = json.dumps(unified_statistics)
+            return JsonResponse(unified_statistics)
 
         except:
             e = sys.exc_info()[1]

@@ -41,6 +41,9 @@ export const Panel = ({
         <Grid item xs={4} md={4}>
           <Item>{`Win: ${!!data ? data.win : ""}`}</Item>
         </Grid>
+        <Grid item xs={12} md={12}>
+          <Item>{`Cause: ${!!data ? data.error : ""}`}</Item>
+        </Grid>
       </Grid>
       <hr />
       <Canvas
