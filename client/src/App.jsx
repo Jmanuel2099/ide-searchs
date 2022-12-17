@@ -7,8 +7,8 @@ import { Panel } from "./Panel";
 const formData = {
   //fase
   method: "",
-  cannibals: "",
-  missionary: "",
+  cannibals: 3,
+  missionary: 3,
   side: "left",
   time: "1",
 };
@@ -37,6 +37,7 @@ const App = () => {
   } = useForm(formData, formValidations);
 
   const [data, setData] = useState(null);
+
   const [cani1, setCani1] = useState({ x: 0, y: 15, lado: "izq" });
   const [cani2, setCani2] = useState({ x: 0, y: 55, lado: "izq" });
   const [cani3, setCani3] = useState({ x: 0, y: 95, lado: "izq" });
@@ -52,7 +53,6 @@ const App = () => {
   }, [data]);
 
   const nextState = () => {
-   
     if (indice >= 0 && indice < max) {
       const state = data.path[indice];
       validarm(state.missionary, state.side);
@@ -62,7 +62,7 @@ const App = () => {
   };
 
   const validarm = (value, s) => {
-    debugger;
+    
     if (s == "left") {
       switch (value) {
         case 0:
@@ -73,7 +73,7 @@ const App = () => {
           break;
         case 1:
           if (min1.lado == "der" && min2.lado == "der" && min3.lado == "der") {
-            setCani1({ x: 0, y: 15, lado: "izq" });
+            setMin1({ x: 40, y: 15, lado: "izq" });
 
             break;
           } else if (
@@ -102,11 +102,11 @@ const App = () => {
             min2.lado == "der" &&
             min3.lado == "izq"
           ) {
-            setMin1({ x: 220, y: 55, lado: "der" });
+            setMin1({ x: 220, y: 15, lado: "der" });
             break;
           }
           if (min1.lado == "der" && min2.lado == "izq" && min3.lado == "izq") {
-            setMin1({ x: 220, y: 55, lado: "der" });
+            setMin2({ x: 220, y: 55, lado: "der" });
             break;
           }
           break;
@@ -353,7 +353,6 @@ const App = () => {
     }
   };
   const validarc = (value, s) => {
-    debugger;
     if (s == "left") {
       switch (value) {
         case 0:
@@ -478,7 +477,6 @@ const App = () => {
             cani2.lado == "izq" &&
             cani3.lado == "izq"
           ) {
-            console.log("aquii");
             break;
           } else if (
             cani1.lado == "izq" &&
@@ -524,7 +522,7 @@ const App = () => {
             cani2.lado == "der" &&
             cani3.lado == "der"
           ) {
-            setCani2({ x: 0, y: 15, lado: "izq" });
+            setCani2({ x: 0, y: 55, lado: "izq" });
             setCani3({ x: 0, y: 95, lado: "izq" });
             break;
           }
@@ -632,7 +630,7 @@ const App = () => {
             cani2.lado == "izq" &&
             cani3.lado == "izq"
           ) {
-            setCani2({ x: 270, y: 55, lado: "der" });
+            setCani1({ x: 270, y: 15, lado: "izq" });
             break;
           }
           if (
@@ -640,7 +638,7 @@ const App = () => {
             cani2.lado == "der" &&
             cani3.lado == "izq"
           ) {
-            setCani2({ x: 270, y: 55, lado: "der" });
+            setCani1({ x: 270, y: 15, lado: "der" });
             break;
           }
           break;
@@ -752,6 +750,8 @@ const App = () => {
             missionary={missionary}
             side={side}
             time={time}
+            indice={indice}
+            max={max}
           />
         </Grid>
         <Grid item xs={10} md={9} sx={{ background: "#162856", p: "50px" }}>
